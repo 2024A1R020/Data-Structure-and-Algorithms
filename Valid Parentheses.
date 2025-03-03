@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    char s[10001]; 
+    scanf("%s", s); 
+
+    char stack[10001]; 
+    int top = -1;      
+
+    
+    for (int i = 0; s[i] != '\0'; i++) {
+        char current = s[i];
+
+       
+        if (current == '(' || current == '{' || current == '[') {
+            stack[++top] = current;
+        }
+       
+        else if (current == ')' || current == '}' || current == ']') {
+           
+            if (top == -1 || (current == ')' && stack[top] != '(') ||
+                (current == '}' && stack[top] != '{') || 
+                (current == ']' && stack[top] != '[')) {
+                printf("False\n");
+                return 0;
+            }
+            top--; 
+        }
+    }
+
+    if (top != -1) {
+        printf("False\n");
+    } else {
+        printf("True\n");
+    }
+
+    return 0;
+}
